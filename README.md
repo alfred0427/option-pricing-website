@@ -66,6 +66,6 @@ d_2 = d_1 - \sigma \sqrt{T}
 ## 📷 展示畫面
 
 > 以下是一張實際生成的熱圖（不同 Spot 和 Volatility 對 Call 選擇權價格的影響）  
-> ![example](./screenshot.png)
+> ![example](./image.png)
 
 ---
