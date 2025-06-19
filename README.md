@@ -12,28 +12,12 @@ Black-Scholes 模型是一種用於歐式選擇權（European Options）的定�
 
 ### 📄 公式如下：
 
-對於 Call 選擇權：
-\[
-C = S \cdot N(d_1) - K \cdot e^{-rT} \cdot N(d_2)
-\]
+> ![example](./bsmodel.png)
 
-對於 Put 選擇權：
-\[
-P = K \cdot e^{-rT} \cdot N(-d_2) - S \cdot N(-d_1)
-\]
 
 其中：
-\[
-d_1 = \frac{\ln(S/K) + (r + 0.5\sigma^2)T}{\sigma \sqrt{T}}, \quad
-d_2 = d_1 - \sigma \sqrt{T}
-\]
+> ![example](./bs變數介紹.png)
 
-- \( S \)：標的資產現價（Spot Price）  
-- \( K \)：履約價（Strike Price）  
-- \( r \)：無風險利率（Risk-Free Rate）  
-- \( T \)：距到期日時間（Time to Maturity）  
-- \( \sigma \)：波動率（Volatility）  
-- \( N(\cdot) \)：標準常態累積分布函數
 
 ---
 
