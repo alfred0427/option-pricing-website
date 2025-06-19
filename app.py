@@ -1,6 +1,6 @@
 import streamlit as st
 import matplotlib.pyplot as plt
-from scipy.stats import norm
+from scipy.stats import norm #累積常態分佈要用
 import numpy as np
 
 class Option_pricing():
@@ -40,7 +40,7 @@ class Option_pricing():
 
     def plot_heatmap(self):
         fig, ax = plt.subplots(figsize=(12.5, 10))
-        # 轉置價格矩陣（X 軸：Spot，Y 軸：Vol）
+        # 轉置價格矩陣
         im = ax.imshow(self.option_prices.T, origin='lower', cmap='viridis', aspect='auto')
 
         ax.set_xticks(np.arange(len(self.spot_prices)))
@@ -59,7 +59,7 @@ class Option_pricing():
             for j in range(len(self.volatilities)):
                 val = self.option_prices[i, j]
                 color = "black" if val > self.option_prices.max() * 0.5 else "white"
-                # 注意！此處畫圖要對應轉置座標 (i, j) → (i, j)
+                # 
                 if i == center_i and j == center_j:
                     ax.text(i, j, f"{val:.2f}",
                             ha='center', va='center', color='red', fontsize=10, fontweight='bold',
@@ -79,7 +79,7 @@ class Option_pricing():
 
 
 
-# === Streamlit UI ===
+# Streamlit UI 
 
 st.set_page_config(
     page_title="Black-Scholes 定價工具",
