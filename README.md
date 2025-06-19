@@ -37,6 +37,43 @@ Black-Scholes 模型是一種用於歐式選擇權（European Options）的定�
 - `_calculate_prices()`：全網格計算價格矩陣  
 - `plot_heatmap()`：繪製價格熱圖（Spot vs Volatility）
 
+```python
+class Option_pricing():
+    def __init__(self, K ,S, vol, T=1, r=0, option_type="call", grid_size=9):
+        self.S = S
+        self.K = K 
+        self.T = T
+        self.r = r
+        self.vol = vol
+        self.option_type = option_type
+        self.grid_size = grid_size
+
+        self.spot_prices = np.linspace(max(self.S - (self.vol * self.S), 0),
+                                       self.S + (self.vol * self.S),
+                                       self.grid_size)
+        self.volatilities = np.linspace(0.5 * self.vol, 1.5 * self.vol, self.grid_size)
+
+        self.option_prices = np.zeros((len(self.spot_prices), len(self.volatilities)))
+        self._calculate_prices()
+
+    def black_scholes(self, S, K, T, r, sigma, option_type="call"):
+        d1 = (np.log(S / K) + (r + 0.5 * sigma**2) * T) / (sigma * np.sqrt(T))
+        d2 = d1 - sigma * np.sqrt(T)
+        if option_type == "call":
+            return S * norm.cdf(d1) - K * np.exp(-r * T) * norm.cdf(d2)
+        elif option_type == "put":
+            return K * np.exp(-r * T) * norm.cdf(-d2) - S * norm.cdf(-d1)
+        else:
+            raise ValueError("option_type must be 'call' or 'put'.")
+
+    def _calculate_prices(self):
+        for i, spot in enumerate(self.spot_prices):
+            for j, sigma in enumerate(self.volatilities):
+                self.option_prices[i, j] = self.black_scholes(
+                    spot, self.K, self.T, self.r, sigma, self.option_type
+                )
+```
+
 ---
 
 ### 2. 🖼️ Streamlit 使用者介面（`st.sidebar.form` + 主畫面）
